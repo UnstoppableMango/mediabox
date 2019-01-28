@@ -14,25 +14,6 @@ version: '3.5'
 services:
 
     # ----------------------------------------
-    # COUCHPOTATO
-    # ----------------------------------------
-    couchpotato:
-        image: linuxserver/couchpotato
-        container_name: couchpotato
-        restart: unless-stopped
-        network_mode: "bridge"
-        ports:
-            - '${IP_ADDRESS}:5050:5050'
-        environment:
-            - PUID=${PUID}
-            - PGID=${PGID}
-        volumes:
-            - './couchpotato:/config'
-            - '${DLDIR}/completed:/downloads'
-            - '${MOVIEDIR}:/movies'
-            - '/etc/localtime:/etc/localtime:ro'
-
-    # ----------------------------------------
     # DELUGEVPN
     # ----------------------------------------
     arch-delugevpn:
@@ -89,25 +70,6 @@ services:
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
-    # HEADPHONES
-    # ----------------------------------------
-    headphones:
-        image: linuxserver/headphones
-        container_name: headphones
-        restart: unless-stopped
-        network_mode: "bridge"
-        ports:
-            - '${IP_ADDRESS}:8282:8181'
-        environment:
-            - PUID=${PUID}
-            - PGID=${PGID}
-            - TZ=${TZ}
-        volumes:
-            - './headphones:/config'
-            - '${DLDIR}/completed:/downloads'
-            - '${MUSICDIR}:/music'
-
-    # ----------------------------------------
     # JACKETT
     # ----------------------------------------
     jackett:
@@ -123,23 +85,6 @@ services:
         volumes:
             - './jackett:/config'
             - '${DLDIR}/completed:/downloads'
-            - '/etc/localtime:/etc/localtime:ro'
-
-    # ----------------------------------------
-    # JELLYFIN
-    # ----------------------------------------
-    jellyfin:
-        image: jellyfin/jellyfin
-        container_name: jellyfin
-        restart: unless-stopped
-        network_mode: "host"
-        user: "${PUID}:${PGID}"
-        ports:
-            - '${IP_ADDRESS}:8096:8096'
-        volumes:
-            - './jellyfin:/config'
-            - '${TVDIR}:/media/tv'
-            - '${MOVIEDIR}:/media/movies'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
@@ -223,24 +168,6 @@ services:
             - '/proc:/host/proc:ro'
             - '/sys:/host/sys:ro'
             - '/var/run/docker.sock:/var/run/docker.sock:rw'
-
-    # ----------------------------------------
-    # NZBGet
-    # ----------------------------------------
-    nzbget:
-        image: linuxserver/nzbget
-        container_name: nzbget
-        restart: unless-stopped
-        environment:
-          - PUID=${PUID}
-          - PGID=${PGID}
-          - TZ=${TZ}
-        network_mode: 'bridge'
-        ports:
-          - '${IP_ADDRESS}:6789:6789'
-        volumes:
-          - './nzbget:/config'
-          - '${DLDIR}:/downloads'
 
     # ----------------------------------------
     # OMBI
@@ -328,25 +255,6 @@ services:
             - './radarr:/config'
             - '${DLDIR}/completed:/data/completed'
             - '${MOVIEDIR}:/movies'
-            - '/etc/localtime:/etc/localtime:ro'
-
-    # ----------------------------------------
-    # SICKCHILL
-    # ----------------------------------------
-    sickchill:
-        image: linuxserver/sickchill
-        container_name: sickchill
-        restart: unless-stopped
-        network_mode: "bridge"
-        ports:
-            - '${IP_ADDRESS}:8081:8081'
-        environment:
-            - PUID=${PUID}
-            - PGID=${PGID}
-        volumes:
-            - './sickchill:/config'
-            - '${DLDIR}/completed:/downloads'
-            - '${TVDIR}:/tv'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
