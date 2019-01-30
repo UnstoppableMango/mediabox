@@ -81,10 +81,10 @@ slash=$(ip a | grep "$locip" | cut -d ' ' -f6 | awk -F '/' '{print $2}')
 lannet=$(awk -F"." '{print $1"."$2"."$3".0"}'<<<$locip)/$slash
 
 # Get Private Internet Access Info
-if [ -z "$piaanswer" ]; then
-read -r -p "What is your PIA Username?: " piauname
-read -r -s -p "What is your PIA Password? (Will not be echoed): " piapass
-printf "\\n\\n"
+if [ -z "$piauname" ]; then
+    read -r -p "What is your PIA Username?: " piauname
+    read -r -s -p "What is your PIA Password? (Will not be echoed): " piapass
+    printf "\\n\\n"
 fi
 if [ "$piaanswer" == "y" ]; then
 read -r -p "What is your New PIA Username?: " piauname
@@ -112,20 +112,20 @@ fi
 
 # Ask user if they already have TV, Movie, and Music directories
 if [ -z "$diranswer" ]; then
-printf "\\n\\n"
-printf "If you already have TV - Movie - Music directories you want to use you can enter them next.\\n"
-printf "If you want Mediabox to generate it's own directories just press enter to these questions."
-printf "\\n\\n"
-read -r -p "Where do you store your DOWNLOADS? (Please use full path - /path/to/downloads ): " dldirectory
-read -r -p "Where do you store your TV media? (Please use full path - /path/to/tv ): " tvdirectory
-read -r -p "Where do you store your MOVIE media? (Please use full path - /path/to/movies ): " moviedirectory
-read -r -p "Where do you store your MUSIC media? (Please use full path - /path/to/music ): " musicdirectory
+    printf "\\n\\n"
+    printf "If you already have TV - Movie - Music directories you want to use you can enter them next.\\n"
+    printf "If you want Mediabox to generate it's own directories just press enter to these questions."
+    printf "\\n\\n"
+    read -r -p "Where do you store your DOWNLOADS? (Please use full path - /path/to/downloads ): " dldirectory
+    read -r -p "Where do you store your TV media? (Please use full path - /path/to/tv ): " tvdirectory
+    read -r -p "Where do you store your MOVIE media? (Please use full path - /path/to/movies ): " moviedirectory
+    read -r -p "Where do you store your MUSIC media? (Please use full path - /path/to/music ): " musicdirectory
 fi
 if [ "$diranswer" == "n" ]; then
-read -r -p "Where do you store your DOWNLOADS? (Please use full path - /path/to/downloads ): " dldirectory
-read -r -p "Where do you store your TV media? (Please use full path - /path/to/tv ): " tvdirectory
-read -r -p "Where do you store your MOVIE media? (Please use full path - /path/to/movies ): " moviedirectory
-read -r -p "Where do you store your MUSIC media? (Please use full path - /path/to/music ): " musicdirectory
+    read -r -p "Where do you store your DOWNLOADS? (Please use full path - /path/to/downloads ): " dldirectory
+    read -r -p "Where do you store your TV media? (Please use full path - /path/to/tv ): " tvdirectory
+    read -r -p "Where do you store your MOVIE media? (Please use full path - /path/to/movies ): " moviedirectory
+    read -r -p "Where do you store your MUSIC media? (Please use full path - /path/to/music ): " musicdirectory
 fi
 
 # Create the directory structure
@@ -264,11 +264,11 @@ printf "\\n\\n"
 # Configure the access to the Deluge Daemon
 # The same credentials can be used for NZBGet's webui
 if [ -z "$daemonun" ]; then
-echo "You need to set a username and password for some of the programs - including."
-echo "The Deluge daemon, NZBGet's API & web interface."
-read -r -p "What would you like to use as the access username?: " daemonun
-read -r -p "What would you like to use as the access password?: " daemonpass
-printf "\\n\\n"
+    echo "You need to set a username and password for programs to access"
+    echo "The Deluge daemon and NZBGet's API and web interface."
+    read -r -p "What would you like to use as the access username?: " daemonun
+    read -r -p "What would you like to use as the access password?: " daemonpass
+    printf "\\n\\n"
 fi
 
 # Finish up the config
@@ -300,6 +300,7 @@ echo "CPDAEMONPASS=$daemonpass"
 echo "NZBGETUN=$daemonun"
 echo "NZBGETPASS=$daemonpass"
 } >> .env
+
 # Configure Muximux settings and files
 while [ ! -f muximux/www/muximux/settings.ini.php-example ]; do sleep 1; done
 docker stop muximux > /dev/null 2>&1
