@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaBox.CLI", "MediaBox.CLI\MediaBox.CLI.csproj", "{37A4D308-3898-4799-BD81-15E9D40B3351}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{13E4EE28-B3E9-4B17-B1C6-9A85C854F7CB}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		mediabox.sh = mediabox.sh
+		mediaboxconfig.php = mediaboxconfig.php
+		settings.ini.php = settings.ini.php
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F60337A-17BE-43AC-8020-8A62F46E97B9}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		License.txt = License.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37A4D308-3898-4799-BD81-15E9D40B3351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37A4D308-3898-4799-BD81-15E9D40B3351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37A4D308-3898-4799-BD81-15E9D40B3351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37A4D308-3898-4799-BD81-15E9D40B3351}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37A4D308-3898-4799-BD81-15E9D40B3351} = {13E4EE28-B3E9-4B17-B1C6-9A85C854F7CB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {736DD16B-E5F2-498E-90E5-486675751525}
+	EndGlobalSection
+EndGlobal

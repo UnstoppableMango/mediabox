@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine.Experimental" Version="0.1.0-alpha-63724-02" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ovpn\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\ovpn\ca.rsa.2048.crt" Link="ovpn\ca.rsa.2048.crt" />
+    <None Include="..\ovpn\CA_Montreal.ovpn" Link="ovpn\CA_Montreal.ovpn" />
+    <None Include="..\ovpn\CA_Toronto.ovpn" Link="ovpn\CA_Toronto.ovpn" />
+    <None Include="..\ovpn\CA_Vancouver.ovpn" Link="ovpn\CA_Vancouver.ovpn" />
+    <None Include="..\ovpn\crl.rsa.2048.pem" Link="ovpn\crl.rsa.2048.pem" />
+    <None Include="..\ovpn\Czech Republic.ovpn" Link="ovpn\Czech Republic.ovpn" />
+    <None Include="..\ovpn\France.ovpn" Link="ovpn\France.ovpn" />
+    <None Include="..\ovpn\Germany.ovpn" Link="ovpn\Germany.ovpn" />
+    <None Include="..\ovpn\Israel.ovpn" Link="ovpn\Israel.ovpn" />
+    <None Include="..\ovpn\Netherlands.ovpn" Link="ovpn\Netherlands.ovpn" />
+    <None Include="..\ovpn\Romania.ovpn" Link="ovpn\Romania.ovpn" />
+    <None Include="..\ovpn\Spain.ovpn" Link="ovpn\Spain.ovpn" />
+    <None Include="..\ovpn\Sweden.ovpn" Link="ovpn\Sweden.ovpn" />
+    <None Include="..\ovpn\Switzerland.ovpn" Link="ovpn\Switzerland.ovpn" />
+  </ItemGroup>
+
+</Project>

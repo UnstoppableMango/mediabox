@@ -137,6 +137,7 @@ else
   mkdir -p "$dldirectory"/completed
   mkdir -p "$dldirectory"/incomplete
 fi
+
 if [ -z "$tvdirectory" ]; then
     mkdir -p content/tv
     tvdirectory="$PWD/content/tv"
