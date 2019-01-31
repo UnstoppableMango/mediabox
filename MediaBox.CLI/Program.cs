@@ -1,27 +1,27 @@
-﻿using System.CommandLine.Builder;
-using System.CommandLine.Invocation;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using MediaBox.CLI.Config;
-using MediaBox.CLI.Update;
+using MediaBox.CLI.Commands;
+using MediaBox.CLI.Data;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace MediaBox.CLI
 {
-    static class Program
+    internal static class Program
     {
-        static Task<int> Main(string[] args) => GetCommandLineBuilder().Build().InvokeAsync(args);
+        private static Task<int> Main(string[] args)
+        {
+            var tokenSource = new CancellationTokenSource();
 
-        private static CommandLineBuilder GetCommandLineBuilder()
-            => CommandLine.CreateDefaultBuilder()
-#if !DEBUG
-                .RequireUnix()
-#endif
-                .AddAppCommands()
-                .EnablePosixBundling()
-                .RegisterWithDotnetSuggest();
+            return GetHostBuilder(args)
+                .RunCommandLineApplicationAsync<App>(args, tokenSource.Token);
+        }
 
-        private static CommandLineBuilder AddAppCommands(this CommandLineBuilder builder)
-            => builder
-                .RegisterConfigCommand()
-                .RegisterUpdateCommand();
+        private static IHostBuilder GetHostBuilder(string[] args)
+            => Host.CreateDefaultBuilder(args)
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IRepository, LiteDbRepository>();
+                });
     }
 }

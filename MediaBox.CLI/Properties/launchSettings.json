@@ -1,8 +1,7 @@
 {
   "profiles": {
     "MediaBox.CLI": {
-      "commandName": "Project",
-      "commandLineArgs": "config"
+      "commandName": "Project"
     }
   }
 }
