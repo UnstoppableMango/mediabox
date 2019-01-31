@@ -146,6 +146,10 @@ if [ -z "$tvdirectory" ]; then
     mkdir -p content/tv
     tvdirectory="$PWD/content/tv"
 fi
+if [ -z "$animedirectory" ]; then
+    mkdir -p content/tv
+    animedirectory="$PWD/content/anime"
+fi
 if [ -z "$moviedirectory" ]; then
     mkdir -p content/movies
     moviedirectory="$PWD/content/movies"
