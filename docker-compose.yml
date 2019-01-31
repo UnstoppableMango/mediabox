@@ -102,7 +102,7 @@ services:
             - PGID=${PGID}
         volumes:
             - './lidarr:/config'
-            - '${DLDIR}/completed:/data/completed'
+            - '${DLDIR}/completed:/downloads'
             - '${MUSICDIR}:/music'
             - '/etc/localtime:/etc/localtime:ro'
 
