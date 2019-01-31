@@ -84,7 +84,7 @@ services:
             - PGID=${PGID}
         volumes:
             - './jackett:/config'
-            - '${DLDIR}/completed:/downloads'
+            - 'completed-downloads:/downloads'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
@@ -102,8 +102,8 @@ services:
             - PGID=${PGID}
         volumes:
             - './lidarr:/config'
-            - '${DLDIR}/completed:/downloads'
-            - '${MUSICDIR}:/music'
+            - 'completed-downloads:/downloads'
+            - 'music-dir:/music'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
@@ -214,9 +214,10 @@ services:
         volumes:
             - './plex:/config'
             - './plex/transcode:/transcode'
-            - '${TVDIR}:/data/tvshows'
-            - '${MOVIEDIR}:/data/movies'
-            - '${MUSICDIR}:/data/music'
+            - 'tv-dir:/data/tv'
+            - 'anime-dir:/data/anime'
+            - 'movie-dir:/data/movies'
+            - 'music-dir:/data/music'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
@@ -253,8 +254,8 @@ services:
             - PGID=${PGID}
         volumes:
             - './radarr:/config'
-            - '${DLDIR}/completed:/data/completed'
-            - '${MOVIEDIR}:/movies'
+            - 'completed-downloads:/downloads'
+            - 'movie-dir:/movies'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
@@ -273,8 +274,9 @@ services:
             - TZ=${TZ}
         volumes:
             - './sonarr:/config'
-            - '${DLDIR}/completed:/data/completed'
-            - '${TVDIR}:/tv'
+            - 'completed-downloads:/downloads'
+            - 'tv-dir:/tv'
+            - 'anime-dir:/anime'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
@@ -293,7 +295,7 @@ services:
             - TZ=${TZ}
         volumes:
             - './tautulli:/config'
-            - './plex/Library/Application Support/Plex Media Server/Logs:/logs:ro'
+            - 'plex-logs:/logs:ro'
         depends_on:
             - plex
 
@@ -313,3 +315,11 @@ services:
             - TZ=${TZ}
         volumes:
             - '/var/run/docker.sock:/var/run/docker.sock'            
+
+volumes:
+    completed-downloads: ${DLDIR}/completed
+    tv-dir: ${TVDIR}
+    anime-dir: ${ANIMEDIR}
+    movie-dir: ${MOVIEDIR}
+    music-dir: ${MUSICDIR}
+    plex-logs: ./plex/Library/Application Support/Plex Media Server/Logs
