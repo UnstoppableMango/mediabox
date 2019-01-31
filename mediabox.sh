@@ -43,12 +43,14 @@ if [ -e 1.env ]; then
     piapass=$(grep PIAPASS 1.env | cut -d = -f2)
     dldirectory=$(grep DLDIR 1.env | cut -d = -f2)
     tvdirectory=$(grep TVDIR 1.env | cut -d = -f2)
+    animedirectory=$(grep ANIMEDIR 1.env | cut -d = -f2)
     moviedirectory=$(grep MOVIEDIR 1.env | cut -d = -f2)
     musicdirectory=$(grep MUSICDIR 1.env | cut -d = -f2)
     # Echo back the media directioies, and other info to see if changes are needed
     printf "These are the Media Directory paths currently configured.\\n"
     printf "Your DOWNLOAD Directory is: %s \\n" "$dldirectory"
     printf "Your TV Directory is: %s \\n" "$tvdirectory"
+    printf "Your Anime Directory is: %s \\n" "$animedirectory"
     printf "Your MOVIE Directory is: %s \\n" "$moviedirectory"
     printf "Your MUSIC Directory is: %s \\n" "$musicdirectory"
     read  -r -p "Are these directiores still correct? (y/n) " diranswer `echo \n`
@@ -118,12 +120,14 @@ if [ -z "$diranswer" ]; then
     printf "\\n\\n"
     read -r -p "Where do you store your DOWNLOADS? (Please use full path - /path/to/downloads ): " dldirectory
     read -r -p "Where do you store your TV media? (Please use full path - /path/to/tv ): " tvdirectory
+    read -r -p "Where do you store your ANIME media? (Please use full path - /path/to/anime ): " animedirectory
     read -r -p "Where do you store your MOVIE media? (Please use full path - /path/to/movies ): " moviedirectory
     read -r -p "Where do you store your MUSIC media? (Please use full path - /path/to/music ): " musicdirectory
 fi
 if [ "$diranswer" == "n" ]; then
     read -r -p "Where do you store your DOWNLOADS? (Please use full path - /path/to/downloads ): " dldirectory
     read -r -p "Where do you store your TV media? (Please use full path - /path/to/tv ): " tvdirectory
+    read -r -p "Where do you store your ANIME media? (Please use full path - /path/to/anime ): " animedirectory
     read -r -p "Where do you store your MOVIE media? (Please use full path - /path/to/movies ): " moviedirectory
     read -r -p "Where do you store your MUSIC media? (Please use full path - /path/to/music ): " musicdirectory
 fi
@@ -154,24 +158,24 @@ fi
 # Adjust for Container name changes
 [ -d "sickrage/" ] && mv sickrage/ sickchill  # Switch from Sickrage to SickChill
 
-mkdir -p couchpotato
+#mkdir -p couchpotato
 mkdir -p delugevpn
 mkdir -p delugevpn/config/openvpn
 mkdir -p duplicati
 mkdir -p duplicati/backups
-mkdir -p headphones
+#mkdir -p headphones
 mkdir -p historical/env_files
 mkdir -p jackett
-mkdir -p jellyfin
+#mkdir -p jellyfin
 mkdir -p lidarr
 mkdir -p minio
 mkdir -p muximux
-mkdir -p nzbget
+#mkdir -p nzbget
 mkdir -p ombi
 mkdir -p "plex/Library/Application Support/Plex Media Server/Logs"
 mkdir -p portainer
 mkdir -p radarr
-mkdir -p sickchill
+#mkdir -p sickchill
 mkdir -p sonarr
 mkdir -p tautulli
 
@@ -227,6 +231,7 @@ echo "DOCKERGRP=$DOCKERGRP"
 echo "PWD=$PWD"
 echo "DLDIR=$dldirectory"
 echo "TVDIR=$tvdirectory"
+echo "ANIMEDIR=$animedirectory"
 echo "MOVIEDIR=$moviedirectory"
 echo "MUSICDIR=$musicdirectory"
 echo "PIAUNAME=$piauname"
@@ -285,21 +290,19 @@ perl -i -pe 's/"move_completed": false,/"move_completed": true,/g'  delugevpn/co
 docker start delugevpn > /dev/null 2>&1
 
 # Configure NZBGet
-[ -d "content/nbzget" ] && mv content/nbzget/* content/ && rmdir content/nbzget
-while [ ! -f nzbget/nzbget.conf ]; do sleep 1; done
-docker stop nzbget > /dev/null 2>&1
-perl -i -pe "s/ControlUsername=nzbget/ControlUsername=$daemonun/g"  nzbget/nzbget.conf
-perl -i -pe "s/ControlPassword=tegbzn6789/ControlPassword=$daemonpass/g"  nzbget/nzbget.conf
-perl -i -pe "s/{MainDir}\/intermediate/{MainDir}\/incomplete/g" nzbget/nzbget.conf
-docker start nzbget > /dev/null 2>&1
+# while [ ! -f nzbget/nzbget.conf ]; do sleep 1; done
+# docker stop nzbget > /dev/null 2>&1
+# perl -i -pe "s/ControlUsername=nzbget/ControlUsername=$daemonun/g"  nzbget/nzbget.conf
+# perl -i -pe "s/ControlPassword=tegbzn6789/ControlPassword=$daemonpass/g"  nzbget/nzbget.conf
+# docker start nzbget > /dev/null 2>&1
 
 # Push the Deluge Daemon and NZBGet Access info the to Auth file and the .env file
 echo "$daemonun":"$daemonpass":10 >> ./delugevpn/config/auth
 {
 echo "CPDAEMONUN=$daemonun"
 echo "CPDAEMONPASS=$daemonpass"
-echo "NZBGETUN=$daemonun"
-echo "NZBGETPASS=$daemonpass"
+# echo "NZBGETUN=$daemonun"
+# echo "NZBGETPASS=$daemonpass"
 } >> .env
 
 # Configure Muximux settings and files
