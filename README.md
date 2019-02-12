@@ -49,17 +49,24 @@ Install the prerequisite packages:
 
 `$ sudo apt install curl git bridge-utils`
 
-**Note** - Mediabox uses Docker CE as the default Docker version now - if you skip this and run with older Docker versions you may have issues.
+**Note** - Mediabox uses Docker CE as the default Docker version - if you skip this and run with older/other Docker versions you may have issues.
 
-1. Uninstall old versions: `$ sudo apt remove docker docker-engine docker.io containerd runc` and `$ sudo snap remove docker`
-    It’s OK if apt and/or snap report that none of these packages are installed.
-2. Install Docker CE: `$ curl -fsSL https://get.docker.com -o get-docker.sh` then `$ sudo sh get-docker.sh`
-3. Install Docker-Compose:
+1. Uninstall old versions - It’s OK if apt and/or snap report that none of these packages are installed.  
+    `$ sudo apt remove docker docker-engine docker.io containerd runc`  
+    `$ sudo snap remove docker`  
+
+2. Install Docker CE:  
+    `$ curl -fsSL https://get.docker.com -o get-docker.sh`  
+    `$ sudo sh get-docker.sh`  
+
+3. Install Docker-Compose:  
+
     ```bash
     sudo curl -s https://api.github.com/repos/docker/compose/releases/latest | grep "browser_download_url" | grep -m1 `uname -s`-`uname -m` | cut -d '"' -f4 | xargs sudo curl -L -o /usr/local/bin/docker-compose
     ```
-4. Set the permissions: `$ sudo chmod +x /usr/local/bin/docker-compose`
-5. Verify the Docker Compose installation: `$ docker-compose -v`
+
+4. Set the permissions: `$ sudo chmod +x /usr/local/bin/docker-compose`  
+5. Verify the Docker Compose installation: `$ docker-compose -v`  
 
 Add the current user to the docker group:
 
