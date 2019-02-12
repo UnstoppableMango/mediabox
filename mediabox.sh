@@ -70,6 +70,8 @@ localuname=$(id -u -n)
 PUID=$(id -u "$localuname")
 # Get GUID
 PGID=$(id -g "$localuname")
+# Get Docker Group Number
+DOCKERGRP=$(grep docker /etc/group | cut -d ':' -f 3)
 # Get Hostname
 thishost=$(hostname)
 # Get IP Address
@@ -229,6 +231,7 @@ echo "HOSTNAME=$thishost"
 echo "IP_ADDRESS=$locip"
 echo "PUID=$PUID"
 echo "PGID=$PGID"
+echo "DOCKERGRP=$DOCKERGRP"
 echo "PWD=$PWD"
 echo "DLDIR=$dldirectory"
 echo "TVDIR=$tvdirectory"
