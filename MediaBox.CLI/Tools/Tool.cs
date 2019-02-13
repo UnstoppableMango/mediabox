@@ -25,8 +25,12 @@ namespace MediaBox.CLI.Tools
         public static string ReadToEnd(this Process process)
         {
             var output = process.StandardOutput.ReadToEnd();
+            var error = process.StandardError.ReadToEnd();
             process.WaitForExit();
-            return output.Replace(Environment.NewLine, string.Empty);
+
+            var result = process.ExitCode >= 0 ? error : output;
+
+            return result.Replace(Environment.NewLine, string.Empty);
         }
     }
 }
