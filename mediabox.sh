@@ -46,7 +46,7 @@ if [ -e 1.env ]; then
     animedirectory=$(grep ANIMEDIR 1.env | cut -d = -f2)
     moviedirectory=$(grep MOVIEDIR 1.env | cut -d = -f2)
     musicdirectory=$(grep MUSICDIR 1.env | cut -d = -f2)
-    # Echo back the media directioies, and other info to see if changes are needed
+    # Echo back the media directories to see if changes are needed
     printf "These are the Media Directory paths currently configured.\\n"
     printf "Your DOWNLOAD Directory is: %s \\n" "$dldirectory"
     printf "Your TV Directory is: %s \\n" "$tvdirectory"
