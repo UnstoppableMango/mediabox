@@ -28,7 +28,7 @@ namespace MediaBox.CLI.Tools
             var error = process.StandardError.ReadToEnd();
             process.WaitForExit();
 
-            var result = process.ExitCode >= 0 ? error : output;
+            var result = process.ExitCode != 0 ? error : output;
 
             return result.Replace(Environment.NewLine, string.Empty);
         }
