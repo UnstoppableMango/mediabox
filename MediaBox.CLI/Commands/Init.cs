@@ -17,16 +17,16 @@ namespace MediaBox.CLI.Commands
         {
             var path = Path ?? Directory.GetCurrentDirectory();
 
-            var username = Environment.UserName;
+            var username = Tool.Run("id", "-un").ReadToEnd();
+            var puid = Tool.Run("id", "-u", username);
+            var pgid = Tool.Run("id", "-g", username);
+            var dockerGroup = Tool.Run("grep", "docker /etc/group | cut -d ':' -f 3");
 
-            console.WriteLine($"Path is {path}");
-            console.WriteLine($"Username is {username}");
-
-            console.WriteLine($"OS is {Environment.OSVersion}");
-
-            console.WriteLine("Executing id");
-
-            Tool.Run("id", "-un");
+            console.WriteLine(path);
+            console.WriteLine(username);
+            console.WriteLine(puid);
+            console.WriteLine(pgid);
+            console.WriteLine(dockerGroup);
         }
     }
 }

@@ -4,18 +4,27 @@ namespace MediaBox.CLI.Tools
 {
     public static class Tool
     {
-        public static void Run(string name, params string[] args)
+        public static Process Run(string name, string args)
         {
             var info = new ProcessStartInfo()
             {
                 FileName = name,
-                Arguments = string.Join(' ', args),
+                Arguments = args,
                 //WorkingDirectory
+                RedirectStandardOutput = true
             };
 
-            var process = Process.Start(info);
+            return Process.Start(info);
+        }
 
+        public static Process Run(string name, params string[] args)
+            => Run(name, string.Join(' ', args));
+
+        public static string ReadToEnd(this Process process)
+        {
+            var output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
+            return output;
         }
     }
 }
