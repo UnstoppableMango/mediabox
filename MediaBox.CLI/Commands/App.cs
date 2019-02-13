@@ -7,6 +7,7 @@ using MediaBox.CLI.Data;
 namespace MediaBox.CLI.Commands
 {
     [Command]
+    [Subcommand(typeof(Init))]
     internal class App
     {
         private readonly IRepository _repository;
@@ -43,9 +44,9 @@ namespace MediaBox.CLI.Commands
         [Option("--music-dir")]
         public string MusicDirectory { get; set; }
 
-        public void OnExecute()
+        public void OnExecute(CommandLineApplication app)
         {
-
+            app.ShowHelp();
         }
     }
 }
