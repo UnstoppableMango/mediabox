@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace MediaBox.CLI.Tools
 {
@@ -24,7 +25,7 @@ namespace MediaBox.CLI.Tools
         {
             var output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
-            return output;
+            return output.Replace(Environment.NewLine, string.Empty);
         }
     }
 }
