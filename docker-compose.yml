@@ -84,7 +84,7 @@ services:
       - PGID=${PGID}
     volumes:
       - './jackett:/config'
-      - 'completed-downloads:/downloads'
+      - '${DLDIR}/completed:/downloads'
       - '/etc/localtime:/etc/localtime:ro'
 
   # ----------------------------------------
@@ -102,8 +102,8 @@ services:
       - PGID=${PGID}
     volumes:
       - './lidarr:/config'
-      - 'completed-downloads:/downloads'
-      - 'music-dir:/music'
+      - '${DLDIR}/completed:/downloads'
+      - '${MUSICDIR}:/music'
       - '/etc/localtime:/etc/localtime:ro'
 
   # ----------------------------------------
@@ -224,10 +224,10 @@ services:
     volumes:
       - './plex:/config'
       - './plex/transcode:/transcode'
-      - 'tv-dir:/data/tv'
-      - 'anime-dir:/data/anime'
-      - 'movie-dir:/data/movies'
-      - 'music-dir:/data/music'
+      - '${TVDIR}/local:/data/tv'
+      - '${ANIMEDIR}/local:/data/anime'
+      - '${MOVIEDIR}/local:/data/movies'
+      - '${MUSICDIR}/local:/data/music'
       - '/etc/localtime:/etc/localtime:ro'
 
   # ----------------------------------------
@@ -264,8 +264,8 @@ services:
       - PGID=${PGID}
     volumes:
       - './radarr:/config'
-      - 'completed-downloads:/downloads'
-      - 'movie-dir:/movies'
+      - '${DLDIR}/completed:/downloads'
+      - '${MOVIEDIR}:/movies'
       - '/etc/localtime:/etc/localtime:ro'
 
   # ----------------------------------------
@@ -284,9 +284,9 @@ services:
       - TZ=${TZ}
     volumes:
       - './sonarr:/config'
-      - 'completed-downloads:/downloads'
-      - 'tv-dir:/tv'
-      - 'anime-dir:/anime'
+      - '${DLDIR}/completed:/downloads'
+      - '${TVDIR}:/tv'
+      - '${ANIMEDIR}:/anime'
       - '/etc/localtime:/etc/localtime:ro'
 
   # ----------------------------------------
@@ -305,7 +305,7 @@ services:
       - TZ=${TZ}
     volumes:
       - './tautulli:/config'
-      - 'plex-logs:/logs:ro'
+      - './plex/Library/Application Support/Plex Media Server/Logs:/logs:ro'
     depends_on:
       - plex
 
