@@ -12,6 +12,7 @@ namespace MediaBox.CLI.Tools
                 FileName = name,
                 Arguments = args,
                 //WorkingDirectory
+                RedirectStandardError = true,
                 RedirectStandardOutput = true
             };
 
