@@ -21,7 +21,7 @@ namespace MediaBox.CLI.Commands
             var puid = Tool.Run("id", "-u", username).ReadToEnd();
             var pgid = Tool.Run("id", "-g", username).ReadToEnd();
             var grepOutput = Tool.Run("grep", "docker", "/etc/group").ReadToEnd();
-            var dockerGroup = Tool.Run("cut", $"'{grepOutput}'", "-d", ":", "-f", "3").ReadToEnd();
+            var dockerGroup = Tool.Run("cut", "-d", ":", "-f", "3", "<<<", grepOutput).ReadToEnd();
 
             console.WriteLine(path);
             console.WriteLine(username);
