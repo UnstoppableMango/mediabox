@@ -231,10 +231,10 @@ services:
     volumes:
       - "./plex:/config"
       - "./plex/transcode:/transcode"
-      - "${TVDIR}/local:/data/tv"
-      - "${ANIMEDIR}/local:/data/anime"
-      - "${MOVIEDIR}/local:/data/movies"
-      - "${MUSICDIR}/local:/data/music"
+      - "${TVDIR}:/data/tv"
+      - "${ANIMEDIR}:/data/anime"
+      - "${MOVIEDIR}:/data/movies"
+      - "${MUSICDIR}:/data/music"
       - "/etc/localtime:/etc/localtime:ro"
 
   # ----------------------------------------
